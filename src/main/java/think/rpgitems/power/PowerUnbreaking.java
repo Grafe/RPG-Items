@@ -28,37 +28,40 @@ import think.rpgitems.power.types.PowerHit;
 
 public class PowerUnbreaking extends Power implements PowerHit {
 
-    public int level = 1;
-    private Random random = new Random();
+	public int level = 1;
+	private Random random = new Random();
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void hit(Player player, LivingEntity e) {
-        if (random.nextDouble() < ((double) level) / 100d) {
-            System.out.println(player.getItemInHand().getDurability());
-            player.getItemInHand().setDurability((short) (player.getItemInHand().getDurability() - 1));
-            System.out.println(player.getItemInHand().getDurability());
-            player.updateInventory();
-        }
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public void hit(Player player, LivingEntity e) {
+		if (random.nextDouble() < ((double) level) / 100d) {
+			System.out.println(player.getItemInHand().getDurability());
+			player.getItemInHand().setDurability(
+					(short) (player.getItemInHand().getDurability() - 1));
+			System.out.println(player.getItemInHand().getDurability());
+			player.updateInventory();
+		}
+	}
 
-    @Override
-    public void init(ConfigurationSection s) {
-        level = s.getInt("level", 1);
-    }
+	@Override
+	public void init(ConfigurationSection s) {
+		level = s.getInt("level", 1);
+	}
 
-    @Override
-    public void save(ConfigurationSection s) {
-        s.set("level", level);
-    }
+	@Override
+	public void save(ConfigurationSection s) {
+		s.set("level", level);
+	}
 
-    @Override
-    public String getName() {
-        return "unbreaking";
-    }
+	@Override
+	public String getName() {
+		return "unbreaking";
+	}
 
-    @Override
-    public String displayText(String locale) {
-        return String.format(ChatColor.GREEN + Locale.get("power.unbreaking", locale), level);
-    }
+	@Override
+	public String displayText(String locale) {
+		return String
+				.format(ChatColor.GREEN
+						+ Locale.get("power.unbreaking", locale), level);
+	}
 }

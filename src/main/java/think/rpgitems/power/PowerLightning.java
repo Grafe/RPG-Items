@@ -28,40 +28,43 @@ import think.rpgitems.data.Locale;
 import think.rpgitems.power.types.PowerHit;
 import think.rpgitems.power.types.PowerProjectileHit;
 
-public class PowerLightning extends Power implements PowerHit, PowerProjectileHit {
+public class PowerLightning extends Power implements PowerHit,
+		PowerProjectileHit {
 
-    public int chance = 20;
-    private Random random = new Random();
+	public int chance = 20;
+	private Random random = new Random();
 
-    @Override
-    public void hit(Player player, LivingEntity e) {
-        if (random.nextInt(chance) == 0)
-            e.getWorld().strikeLightning(e.getLocation());
-    }
+	@Override
+	public void hit(Player player, LivingEntity e) {
+		if (random.nextInt(chance) == 0)
+			e.getWorld().strikeLightning(e.getLocation());
+	}
 
-    @Override
-    public void projectileHit(Player player, Projectile p) {
-        if (random.nextInt(chance) == 0)
-            p.getWorld().strikeLightning(p.getLocation());
-    }
+	@Override
+	public void projectileHit(Player player, Projectile p) {
+		if (random.nextInt(chance) == 0)
+			p.getWorld().strikeLightning(p.getLocation());
+	}
 
-    @Override
-    public String displayText(String locale) {
-        return ChatColor.GREEN + String.format(Locale.get("power.lightning", locale), (int) ((1d / (double) chance) * 100d));
-    }
+	@Override
+	public String displayText(String locale) {
+		return ChatColor.GREEN
+				+ String.format(Locale.get("power.lightning", locale),
+						(int) ((1d / (double) chance) * 100d));
+	}
 
-    @Override
-    public String getName() {
-        return "lightning";
-    }
+	@Override
+	public String getName() {
+		return "lightning";
+	}
 
-    @Override
-    public void init(ConfigurationSection s) {
-        chance = s.getInt("chance");
-    }
+	@Override
+	public void init(ConfigurationSection s) {
+		chance = s.getInt("chance");
+	}
 
-    @Override
-    public void save(ConfigurationSection s) {
-        s.set("chance", chance);
-    }
+	@Override
+	public void save(ConfigurationSection s) {
+		s.set("chance", chance);
+	}
 }

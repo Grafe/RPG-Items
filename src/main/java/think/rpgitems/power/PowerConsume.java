@@ -26,34 +26,34 @@ import think.rpgitems.power.types.PowerRightClick;
 
 public class PowerConsume extends Power implements PowerRightClick {
 
-    @Override
-    public void rightClick(Player player) {
-        ItemStack item = player.getInventory().getItemInHand();
-        int count = item.getAmount() - 1;
-        if (count == 0) {
-            player.getInventory().setItemInHand(null);
-        } else {
-            item.setAmount(count);
-        }
-    }
+	@Override
+	public void rightClick(Player player) {
+		ItemStack item = player.getInventory().getItemInHand();
+		int count = item.getAmount() - 1;
+		if (count == 0) {
+			player.getInventory().setItemInHand(null);
+		} else {
+			item.setAmount(count);
+		}
+	}
 
-    @Override
-    public void init(ConfigurationSection s) {
+	@Override
+	public void init(ConfigurationSection s) {
 
-    }
+	}
 
-    @Override
-    public void save(ConfigurationSection s) {
+	@Override
+	public void save(ConfigurationSection s) {
 
-    }
+	}
 
-    @Override
-    public String getName() {
-        return "consume";
-    }
+	@Override
+	public String getName() {
+		return "consume";
+	}
 
-    @Override
-    public String displayText(String locale) {
-        return ChatColor.GREEN + Locale.get("power.consume", locale);
-    }
+	@Override
+	public String displayText(String locale) {
+		return ChatColor.GREEN + Locale.get("power.consume", locale);
+	}
 }

@@ -28,37 +28,39 @@ import think.rpgitems.power.types.PowerHit;
 
 public class PowerKnockup extends Power implements PowerHit {
 
-    public int chance = 20;
-    public double power = 2;
+	public int chance = 20;
+	public double power = 2;
 
-    private Random rand = new Random();
+	private Random rand = new Random();
 
-    @Override
-    public void hit(Player player, LivingEntity e) {
-        if (rand.nextInt(chance) == 0)
-            e.setVelocity(player.getLocation().getDirection().setY(power));
-    }
+	@Override
+	public void hit(Player player, LivingEntity e) {
+		if (rand.nextInt(chance) == 0)
+			e.setVelocity(player.getLocation().getDirection().setY(power));
+	}
 
-    @Override
-    public String displayText(String locale) {
-        return ChatColor.GREEN + String.format(Locale.get("power.knockup", locale), (int) ((1d / (double) chance) * 100d));
-    }
+	@Override
+	public String displayText(String locale) {
+		return ChatColor.GREEN
+				+ String.format(Locale.get("power.knockup", locale),
+						(int) ((1d / (double) chance) * 100d));
+	}
 
-    @Override
-    public String getName() {
-        return "knockup";
-    }
+	@Override
+	public String getName() {
+		return "knockup";
+	}
 
-    @Override
-    public void init(ConfigurationSection s) {
-        chance = s.getInt("chance");
-        power = s.getDouble("power", 2);
-    }
+	@Override
+	public void init(ConfigurationSection s) {
+		chance = s.getInt("chance");
+		power = s.getDouble("power", 2);
+	}
 
-    @Override
-    public void save(ConfigurationSection s) {
-        s.set("chance", chance);
-        s.set("power", power);
-    }
+	@Override
+	public void save(ConfigurationSection s) {
+		s.set("chance", chance);
+		s.set("power", power);
+	}
 
 }
